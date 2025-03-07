@@ -5,21 +5,61 @@ plugins {
 }
 
 group = 'ch.so.agi'
-version = '0.0.1-SNAPSHOT'
 
 java {
+/*
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+*/    
+    sourceCompatibility = "17"
+    targetCompatibility = "17"
+}
+
+ext {
+    geotoolsVersion = '32.2'
 }
 
 repositories {
-    mavenCentral()
+    maven { url "https://maven.geo-solutions.it/" }
+    maven { url "https://repo.osgeo.org/repository/release/" }
+    mavenCentral()    
 }
+
+configurations.all {
+    exclude group: 'jakarta.xml.bind'
+}
+
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    implementation "org.geotools:gt-main:${geotoolsVersion}"
+    implementation "org.geotools:gt-geotiff:${geotoolsVersion}"
+    implementation "org.geotools:gt-epsg-hsql:${geotoolsVersion}"
+    implementation "org.geotools:gt-xml:${geotoolsVersion}"
+    implementation "org.geotools:gt-metadata:${geotoolsVersion}"
+
+    implementation "javax.media:jai_core:1.1.3"
+    implementation "javax.media:jai_imageio:1.1"
+    //implementation 'org.glassfish.jaxb:jaxb-runtime:2.2.11' // zu neu
+
+    //implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    //implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+    //implementation 'javax.activation:activation:1.1.1'
+    //implementation 'org.glassfish.jaxb:jaxb-core:2.3.0.1'
+}
+
+    implementation "com.sun.xml.bind:jaxb-impl:2.2.11"
+    implementation "com.sun.xml.bind:jaxb-core:2.2.11"
+
+
+
+    //implementation "org.geotools:gt-imageio-ext:${geotoolsVersion}"
+
+    
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     //developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
