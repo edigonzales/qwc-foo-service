@@ -44,8 +44,9 @@ public class MainController {
 
     @GetMapping("/foo")
     public String foo() throws IOException {
-        File file = new File("/Users/stefan/Downloads/swissalti3d_2019_2614-1258_0.5_2056_5728.tif");
-        
+        File file = new File("/Users/stefan/Downloads/ch.so.agi.lidar_2014.dtm.tif");
+//        File file = new File("/Users/stefan/Downloads/swissalti3d_2019_2614-1258_0.5_2056_5728.tif");
+
 //        Hints hints = new Hints(Hints.VIRTUAL_TABLE_PARAMETERS, Collections.singletonMap("SKIP_GDAL_METADATA", "true"));
 //        GeoTiffReader reader = new GeoTiffReader(file, hints);
 
@@ -55,7 +56,7 @@ public class MainController {
         hints.put(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER, Boolean.TRUE);
         
         // Create the reader with our hints
-        GeoTiffReader reader = new GeoTiffReader(file, hints);
+        GeoTiffReader reader = new GeoTiffReader(file);
         
         // Read the coverage
         GridCoverage2D coverage = reader.read(null);
